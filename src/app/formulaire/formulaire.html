@@ -1,5 +1,5 @@
 <div class="bg-brand-azur p-10 flex justify-center">
-    <form (ngSubmit)="onSubmit()" class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 w-6/12 bg-brand-white rounded-lg shadow-md">      
+    <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 w-6/12 bg-brand-white rounded-lg shadow-md">      
         <div class="col-start-1">
             <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom <span class="text-red-500">*</span></label>
             
@@ -22,7 +22,7 @@
                 }
         </div>
         <div class="col-start-2">
-            <label for="nom" class="block col-start-2 text-sm font-medium text-gray-700 mb-1">Nom <span class="text-red-500">*</span></label>  
+            <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom <span class="text-red-500">*</span></label>  
             
             <input type="text" id="nom" name="nom" [(ngModel)]="nom" pattern="^[A-Za-zÀ-ÿ\s'-]+$" placeholder="Nom de Famille"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
@@ -54,12 +54,12 @@
                 <div class="text-red-600 text-sm mt-1">
                     @if (num.hasError('required')){
                         <div>
-                            Ce champ est obligatoire
+                            Ce champ est obligatoire.
                         </div>
                     }
                     @if (num.hasError('pattern')){
                         <div>
-                            Veuillez entrer un numéro de téléphone valide
+                            Veuillez entrer un numéro de téléphone français valide (ex: 06 12 34 56 78).
                         </div>
                     }
                 </div>
@@ -72,24 +72,22 @@
             <select id="type" name="type" [(ngModel)]="type"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
                 required #typeModel="ngModel">
-                <option value="" disabled>Choissisez une option</option>
-                <option value="Client">Client</option>
+                <option value="" disabled selected>Choissisez une option</option> <option value="Client">Client</option>
                 <option value="Fournisseur">Fournisseur</option>
-
-                    @if (typeModel.invalid && (typeModel.dirty || typeModel.touched)) {
-                        <div class="text-red-6àà text-sm mt-1">
-                            @if (typeModel.hasError('required')) {
-                                <div>
-                                    Ce champ est obligatoire.
-                                </div>
-                            }
-                        </div>
-                    }
             </select>
+                @if (typeModel.invalid && (typeModel.dirty || typeModel.touched)) {
+                    <div class="text-red-600 text-sm mt-1">
+                        @if (typeModel.hasError('required')) {
+                            <div>
+                                Ce champ est obligatoire.
+                            </div>
+                        }
+                    </div>
+                }
         </div>
         
-        <div class="col-span-2">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Email <span class="text-red-500">*</span></label>
+        <div class="col-span-2 col-start-1">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
             
             <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email"
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:col-span-2 sm:text-sm"
@@ -112,7 +110,7 @@
         </div>
         
         
-        <label for="img" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Photo <span class="text-red-500">*</span></label>
+        <label for="img" class="block text-sm font-medium text-gray-700 mb-1">Photo <span class="text-red-500">*</span></label>
         <div class="sm:col-span-2">
             <input type="file" id="img" name="img" (change)="onFileSelected($event)" class="hidden">
             
@@ -129,7 +127,7 @@
             <button type="submit" class="px-40 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-black bg-brand-azur hover:bg-brand-azur-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-azur">
                 Valider
             </button>
-            <button type="reset" (click)="onReset()" class="px-20 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-blue hover:bg-brand-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue">
+            <button type="reset" (click)="onReset(contactForm)" class="px-20 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-blue hover:bg-brand-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue">
                 Annuler
             </button>
         </div>
