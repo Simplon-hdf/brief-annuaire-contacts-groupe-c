@@ -1,52 +1,54 @@
-<form (ngSubmit)="onSubmit()" class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 w-6/12 bg-brand-white rounded-lg shadow-md">
-    <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom <span class="text-red-500">*</span></label>
-    <label for="nom" class="block col-start-2 text-sm font-medium text-gray-700 mb-1">Nom <span class="text-red-500">*</span></label>
+<div class="bg-brand-azur p-10 flex justify-center">
+    <form (ngSubmit)="onSubmit()" class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 w-6/12 bg-brand-white rounded-lg shadow-md">
+        <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom <span class="text-red-500">*</span></label>
+        <label for="nom" class="block col-start-2 text-sm font-medium text-gray-700 mb-1">Nom <span class="text-red-500">*</span></label>
 
-    <input type="text" id="prenom" name="prenom" [(ngModel)]="prenom" placeholder="Prénom"
-           class="col-start-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
-           required>   
-    <input type="text" id="nom" name="nom" [(ngModel)]="nom" placeholder="Nom de Famille"
-           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
-           required>
-    
-    <label for="numero" class="block text-sm font-medium text-gray-700 mb-1">Numéro de Téléphone <span class="text-red-500">*</span></label>
-    <label for="type" class="block text-sm font-medium text-gray-700 mb-1 col-start-2">Type de contact <span class="text-red-500">*</span></label>
-
-    <input type="tel" id="numero" name="numero" [(ngModel)]="numero" placeholder="0X XX XX XX XX"
-           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
-           required>
-    <select id="type" name="type" 
+        <input type="text" id="prenom" name="prenom" [(ngModel)]="prenom" placeholder="Prénom"
+            class="col-start-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
+            required>   
+        <input type="text" id="nom" name="nom" [(ngModel)]="nom" placeholder="Nom de Famille"
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
             required>
-        <option value="" disabled>Choissisez une option</option>
-        <option value="Client">Client</option>
-        <option value="Fournisseur">Fournisseur</option>
-    </select>
-
-    <label for="email" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Email <span class="text-red-500">*</span></label>
-    <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email"
-           class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:col-span-2 sm:text-sm"
-           required>
-    
-    <label for="img" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Photo <span class="text-red-500">*</span></label>
-    <div class="sm:col-span-2">
-        <input type="file" id="img" name="img" (change)="onFileSelected($event)" class="hidden">
         
-        <label for="img" class="custom-file-upload flex items-center justify-between px-4 py-2 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:border-brand-blue focus-within:ring-brand-blue focus-within:border-brand-blue">
-            <span class="text-gray-500">{{ selectedFileName }}</span> <span class="ml-3 inline-flex items-center px-4 py-1.5 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-blue hover:bg-brand-blue-dark">
-                Parcourir
-            </span>
-        </label>
-        <p *ngIf="errorMessage" class="text-red-600 text-sm mt-1">{{ errorMessage }}</p>
+        <label for="numero" class="block text-sm font-medium text-gray-700 mb-1">Numéro de Téléphone <span class="text-red-500">*</span></label>
+        <label for="type" class="block text-sm font-medium text-gray-700 mb-1 col-start-2">Type de contact <span class="text-red-500">*</span></label>
 
-    </div>
+        <input type="tel" id="numero" name="numero" [(ngModel)]="numero" placeholder="0X XX XX XX XX"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
+            required>
+        <select id="type" name="type" 
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
+                required>
+            <option value="" disabled>Choissisez une option</option>
+            <option value="Client">Client</option>
+            <option value="Fournisseur">Fournisseur</option>
+        </select>
 
-    <div class="sm:col-span-2 flex justify-center mt-4 flex-row-reverse gap-5">
-        <button type="submit" class="px-40 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-black bg-brand-azur hover:bg-brand-azur-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-azur">
-            Valider
-        </button>
-        <button type="reset" (click)="onReset()" class="px-20 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-blue hover:bg-brand-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue">
-            Annuler
-        </button>
-    </div>
-</form>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Email <span class="text-red-500">*</span></label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:col-span-2 sm:text-sm"
+            required>
+        
+        <label for="img" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Photo <span class="text-red-500">*</span></label>
+        <div class="sm:col-span-2">
+            <input type="file" id="img" name="img" (change)="onFileSelected($event)" class="hidden">
+            
+            <label for="img" class="custom-file-upload flex items-center justify-between px-4 py-2 border border-gray-300 rounded-md shadow-sm cursor-pointer hover:border-brand-blue focus-within:ring-brand-blue focus-within:border-brand-blue">
+                <span class="text-gray-500">{{ selectedFileName }}</span> <span class="ml-3 inline-flex items-center px-4 py-1.5 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-blue hover:bg-brand-blue-dark">
+                    Parcourir
+                </span>
+            </label>
+            <p *ngIf="errorMessage" class="text-red-600 text-sm mt-1">{{ errorMessage }}</p>
+
+        </div>
+
+        <div class="sm:col-span-2 flex justify-center mt-4 flex-row-reverse gap-5">
+            <button type="submit" class="px-40 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-black bg-brand-azur hover:bg-brand-azur-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-azur">
+                Valider
+            </button>
+            <button type="reset" (click)="onReset()" class="px-20 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-blue hover:bg-brand-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue">
+                Annuler
+            </button>
+        </div>
+    </form>
+</div>
