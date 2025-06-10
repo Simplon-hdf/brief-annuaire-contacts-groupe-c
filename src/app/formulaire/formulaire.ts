@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'; 
-import { FormsModule } from '@angular/forms'; 
+import { Component, NgModule } from '@angular/core'; 
+import { FormsModule, NgModel } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 
 @Component({
