@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'; 
-import { FormsModule } from '@angular/forms'; 
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -42,16 +42,26 @@ export class Formulaire {
     }
   }
 
-  onSubmit(): void {
-    this.resetForm();
+  onSubmit(form: NgForm): void {
+    if (form.valid) {
+      this.resetForm();
+      form.resetForm();
+
+    } else {
+      this.markAllAsTouched(form);
+    }
   }
 
-  clearError(): void {
-    this.errorMessage = null;
+  private markAllAsTouched(form: NgForm): void {
+    Object.keys(form.controls).forEach(field => {
+      const control = form.controls[field];
+      control.markAsTouched({ onlySelf: true });
+    });
   }
 
-  onReset(): void {
+  onReset(form: NgForm): void {
     this.resetForm();
+    form.resetForm();
   }
 
   private resetForm(): void {
