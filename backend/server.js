@@ -1,48 +1,39 @@
-// my-backend/server.js
 const express = require('express');
-const multer = require('multer'); // Middleware for handling multipart/form-data (file uploads)
-const sqlite3 = require('sqlite3').verbose(); // SQLite database driver
-const path = require('path'); // Node.js path module for working with file paths
-const cors = require('cors'); // Middleware to enable Cross-Origin Resource Sharing
+const multer = require('multer');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path'); 
+const cors = require('cors'); 
 
 const app = express();
-const PORT = 3000; // The port your backend server will listen on
+const PORT = 3000; 
 
 // --- Middleware Setup ---
-// Enable CORS for all origins (for development purposes).
-// In production, you should restrict this to your Angular app's origin (e.g., origin: 'http://localhost:4200').
 app.use(cors());
 
-// Body parser for JSON and URL-encoded data.
-// Multer will handle multipart/form-data, so these are for other types of requests.
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // --- File Storage Setup with Multer ---
-// Configure Multer to specify where to store files and how to name them.
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadPath = path.join(__dirname, 'uploads'); // Files will be saved in a 'uploads' folder relative to server.js
-        // Ensure the 'uploads' directory exists. If not, create it.
+        const uploadPath = path.join(__dirname, 'uploads'); 
         require('fs').mkdirSync(uploadPath, { recursive: true });
-        cb(null, uploadPath); // Callback function: null for no error, then the destination path.
+        cb(null, uploadPath); 
     },
     filename: (req, file, cb) => {
-        // Generate a unique filename to prevent collisions.
-        // Appends current timestamp to the original filename.
         cb(null, Date.now() + '-' + file.originalname);
     }
 });
 const upload = multer({ storage: storage });
 
 // --- SQLite Database Setup ---
-// Connect to the SQLite database. If 'data.db' doesn't exist, it will be created.
 const db = new sqlite3.Database(path.join(__dirname, 'data.db'), (err) => {
     if (err) {
         console.error('Error connecting to SQLite database:', err.message);
     }
     console.log('Connected to the SQLite database.');
-    // Create the 'contacts' table if it doesn't already exist.
+
     db.run(`
         CREATE TABLE IF NOT EXISTS contacts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -64,46 +55,32 @@ const db = new sqlite3.Database(path.join(__dirname, 'data.db'), (err) => {
 
 // --- API Endpoints ---
 
-// POST endpoint for creating a contact with an image.
-// 'upload.single('image')' tells Multer to expect a single file field named 'image'
-// from the incoming form data.
+
 app.post('/api/contacts', upload.single('image'), (req, res) => {
     const { prenom, nom, numero, type, email } = req.body;
-    // Get the path of the uploaded file if one was provided.
-    // req.file contains information about the uploaded file from Multer.
-    const imagePath = req.file ? `/uploads/${req.file.filename}` : null; // Store a relative path that your frontend can use to access the image
+    const imagePath = req.file ? `/uploads/${req.file.filename}` : null; 
 
-    // Basic validation for text fields
     if (!prenom || !nom || !numero || !type || !email) {
-        // If essential text fields are missing, respond with an error.
-        // You might want more robust validation here.
         return res.status(400).json({ error: 'All essential text fields are required.' });
     }
 
-    // Insert data into the SQLite database.
     const stmt = db.prepare(
         'INSERT INTO contacts (prenom, nom, numero, type, email, image_path) VALUES (?, ?, ?, ?, ?, ?)'
     );
     stmt.run(prenom, nom, numero, type, email, imagePath, function(err) {
         if (err) {
-            // If an error occurs during insertion, log it and send a 500 response.
             console.error('Error inserting contact into DB:', err.message);
             return res.status(500).json({ error: err.message });
         }
-        // Respond with success message and the ID of the new contact.
-        // 'this.lastID' is available in the callback of db.run for INSERT statements.
         res.status(201).json({
             message: 'Contact created successfully with image',
-            id: this.lastID, // The ID of the newly inserted row
-            imagePath: imagePath // The path where the image can be accessed
+            id: this.lastID, 
+            imagePath: imagePath 
         });
     });
-    // Finalize the statement (releases resources).
     stmt.finalize();
 });
 
-// Optional: POST endpoint for creating a contact without an image.
-// This is useful if the image is not always required.
 app.post('/api/contacts-no-image', (req, res) => {
     const { prenom, nom, numero, type, email } = req.body;
 
@@ -127,17 +104,13 @@ app.post('/api/contacts-no-image', (req, res) => {
     stmt.finalize();
 });
 
-// Serve static files from the 'uploads' directory.
-// This allows your Angular app to request images from e.g., http://localhost:3000/uploads/your-image.png
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log(`Open your Angular app (usually http://localhost:4200) and submit the form.`);
 });
 
-// Handle graceful shutdown of the database connection
 process.on('SIGINT', () => {
     db.close((err) => {
         if (err) {
