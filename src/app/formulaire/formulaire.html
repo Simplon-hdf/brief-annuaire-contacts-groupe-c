@@ -2,6 +2,7 @@
     <form (ngSubmit)="onSubmit()" class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 w-6/12 bg-brand-white rounded-lg shadow-md">      
         <div class="col-start-1">
             <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom <span class="text-red-500">*</span></label>
+            
             <input type="text" id="prenom" name="prenom" [(ngModel)]="prenom" pattern="^[A-Za-zÀ-ÿ\s'-]+$" placeholder="Prénom" 
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
                 required #prenomModel="ngModel">
@@ -22,6 +23,7 @@
         </div>
         <div class="col-start-2">
             <label for="nom" class="block col-start-2 text-sm font-medium text-gray-700 mb-1">Nom <span class="text-red-500">*</span></label>  
+            
             <input type="text" id="nom" name="nom" [(ngModel)]="nom" pattern="^[A-Za-zÀ-ÿ\s'-]+$" placeholder="Nom de Famille"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
                 required #nomModel="ngModel">
@@ -43,6 +45,7 @@
         
         <div class="col-start-1">
             <label for="numero" class="block text-sm font-medium text-gray-700 mb-1">Numéro de Téléphone <span class="text-red-500">*</span></label>
+            
             <input type="tel" id="numero" name="numero" pattern="^(0[1-9])(?:[ .-]?[0-9]{2}){4}$" [(ngModel)]="numero" placeholder="0X XX XX XX XX"
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
             required #num="ngModel">
@@ -65,20 +68,49 @@
         
         <div class="col-start-2">
             <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Type de contact <span class="text-red-500">*</span></label>
-            <select id="type" name="type" 
+            
+            <select id="type" name="type" [(ngModel)]="type"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:text-sm"
-                required>
-            <option value="" disabled>Choissisez une option</option>
-            <option value="Client">Client</option>
-            <option value="Fournisseur">Fournisseur</option>
-        </select>
+                required #typeModel="ngModel">
+                <option value="" disabled>Choissisez une option</option>
+                <option value="Client">Client</option>
+                <option value="Fournisseur">Fournisseur</option>
+
+                    @if (typeModel.invalid && (typeModel.dirty || typeModel.touched)) {
+                        <div class="text-red-6àà text-sm mt-1">
+                            @if (typeModel.hasError('required')) {
+                                <div>
+                                    Ce champ est obligatoire.
+                                </div>
+                            }
+                        </div>
+                    }
+            </select>
         </div>
         
-
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Email <span class="text-red-500">*</span></label>
-        <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email"
+        <div class="col-span-2">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Email <span class="text-red-500">*</span></label>
+            
+            <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email"
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-blue focus:border-brand-blue sm:col-span-2 sm:text-sm"
-            required>
+            required #emailModel="ngModel">
+
+                @if (emailModel.invalid && (emailModel.dirty || emailModel.touched)) {
+                    <div class="text-red-600 text-sm mt-1">
+                        @if (emailModel.hasError('required')) {
+                            <div>
+                                Ce champ est obligatoire.
+                            </div>
+                        }
+                        @if (emailModel.hasError('email')) {
+                            <div>
+                                Veuillez entrer une adresse email valide.
+                            </div>
+                        }
+                    </div>
+                }
+        </div>
+        
         
         <label for="img" class="block text-sm font-medium text-gray-700 mb-1 sm:col-span-2">Photo <span class="text-red-500">*</span></label>
         <div class="sm:col-span-2">
