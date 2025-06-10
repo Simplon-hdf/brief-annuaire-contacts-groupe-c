@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-formulaire',
@@ -18,6 +19,8 @@ export class Formulaire {
   img: File | null = null;
   selectedFileName: string = "Choissisez un fichier"
   errorMessage: string | null = null;
+
+  constructor(private http: HttpClient) { }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -44,12 +47,61 @@ export class Formulaire {
 
   onSubmit(form: NgForm): void {
     if (form.valid) {
+      if (this.img) {
+        this.uploadContact(this.img, form.value);
+      } else {
+        // If no image is selected, call the dedicated method for text data
+        this.submitContactData(form.value); 
+      }
+
       this.resetForm();
       form.resetForm();
 
     } else {
       this.markAllAsTouched(form);
     }
+  }
+
+  private uploadContact(file: File, formData: any): void {
+    // Make sure this URL matches your backend's endpoint for image uploads
+    const backendUrl = 'http://localhost:3000/api/contacts'; 
+
+    const data = new FormData();
+    data.append('image', file, file.name); 
+    data.append('prenom', formData.prenom);
+    data.append('nom', formData.nom);
+    data.append('numero', formData.numero);
+    data.append('type', formData.type);
+    data.append('email', formData.email);
+
+    // Call the HttpClient to send the POST request
+    this.http.post(backendUrl, data).subscribe({
+      next: (response) => {
+        console.log('Contact created successfully:', response);
+        alert('Contact créé avec succès!'); // Provide user feedback
+      },
+      error: (error) => {
+        console.error('Error creating contact:', error);
+        alert('Erreur lors de la création du contact. Veuillez réessayer.'); // Provide user feedback
+      }
+    });
+  }
+
+  // New method to handle submission when no image is provided
+  private submitContactData(formData: any): void {
+    // Make sure this URL matches your backend's endpoint for no-image uploads
+    const backendUrl = 'http://localhost:3000/api/contacts-no-image'; 
+
+    this.http.post(backendUrl, formData).subscribe({
+      next: (response) => {
+        console.log('Contact data submitted without image:', response);
+        alert('Contact créé avec succès (sans image)!'); 
+      },
+      error: (error) => {
+        console.error('Error submitting contact data without image:', error);
+        alert('Erreur lors de la création du contact (sans image). Veuillez réessayer.');
+      }
+    });
   }
 
   private markAllAsTouched(form: NgForm): void {
