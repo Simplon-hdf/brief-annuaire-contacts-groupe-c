@@ -1,0 +1,30 @@
+
+<article>
+    <header>
+      <figure>
+        <img 
+        src="{{ contact?.imageUrl }}" 
+        alt="{{ contact?.prenom }} {{ contact?.nom }}"
+      />
+        <figcaption>{{ contact?.prenom }} {{ contact?.nom }}</figcaption>
+      </figure>
+      <p>
+        Type : {{ contact?.type | titlecase }}
+      </p>
+    </header>
+  
+    <section>
+        <p>
+          <a href="tel:{{ contact?.telephone }}">{{ contact?.telephone }}</a>
+        </p>
+        <p>
+          <a href="mailto:{{ contact?.email }}">{{ contact?.email }}</a>
+        </p>
+        <p>
+          Adresse : {{ contact?.addresse }}
+        </p>
+      </section>
+  
+   
+  </article>
+  
