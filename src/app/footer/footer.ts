@@ -10,5 +10,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './footer.css'
 })
 export class Footer {
-
+  currentYear: number = new Date().getFullYear();
 }
