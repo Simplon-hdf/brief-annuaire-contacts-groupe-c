@@ -7,6 +7,19 @@
             </svg>
         
         </div>
+
+        <input
+        type="text"
+        [(ngModel)]="searchValue"
+        (input)="onSearchInput()"
+        placeholder="Rechercher par nom, prénom, email, téléphone ou type..."
+        class="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none
+         focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"/>
+        
+
+        
+
+
     </div>
 </div>
     
