@@ -12,8 +12,10 @@ import { CarteContact } from '../carte-contact/carte-contact';
  styleUrl: './annuaire.css'
 })
 export class Annuaire implements OnInit{
- contacts: Contact[] = [];
- isLoading: boolean = false;
+  contacts: Contact[] = [];
+  allContacts:Contact[] = [];
+  isLoading: boolean = false;
+  searchTerm: string = '';
 
 
  constructor (private contactService: ContactService) { }
@@ -30,6 +32,7 @@ export class Annuaire implements OnInit{
      next: (data) => {
        this.contacts = data;
        this.isLoading = false;
+       this.allContacts = data;
      },
      error: (err) => {
        console.error('Error fetching contacts:', err);
@@ -37,4 +40,28 @@ export class Annuaire implements OnInit{
      }
    });
  }
+
+ onSearchTermChanged(searchTerm: string): void {
+  this.searchTerm = searchTerm;
+  this.filterContacts();
+}
+
+private filterContacts(): void {
+  if (!this.searchTerm || this.searchTerm.trim() === '') {
+    this.contacts = [...this.allContacts];
+  } else {
+    const term = this.searchTerm.toLowerCase().trim();
+    this.contacts = this.allContacts.filter(contact => 
+      contact.prenom?.toLowerCase().includes(term) ||
+      contact.nom?.toLowerCase().includes(term) ||
+      contact.email?.toLowerCase().includes(term) ||
+      contact.numero?.includes(term) ||
+      contact.type?.toLowerCase().includes(term)
+    );
+  }
+}
+
+
+
+
 }
