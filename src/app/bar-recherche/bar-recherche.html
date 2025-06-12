@@ -24,7 +24,13 @@
             </button>
         </div>
     </div>
-        
+    
+    <div *ngIf="totalContacts > 0"  class="mt-2 text-sm text-gray-600 text-center sm:text-left">
+        <span *ngIf="!searchValue"> {{ totalContacts }} contact(s) au total</span>
+        <span *ngIf="searchValue"> {{ filteredContacts }} sur {{ totalContacts }} contact(s)
+        <span *ngIf="filteredContacts !== totalContacts" class="text-blue-600"> - "{{ searchValue }}" </span>
+        </span>
+    </div>
 
 
    
