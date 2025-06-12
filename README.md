@@ -3,56 +3,67 @@
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
 
 ## Development server
+## 🚀 Getting Started
 
-To start a local development server, run:
+To run the project locally:
 
 ```bash
+npm install
 ng serve
 ```
-
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🧑‍🏫 Educational Context
 
-```bash
-ng generate component component-name
-```
+A company wants to store information about its contacts.  
+To do so, it requires a **directory application** to manage its **suppliers** and **clients**.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The application must allow:
+- Contact management (clients & suppliers)
+- Contact search functionality
+- Adding new contacts via a form
+- Visual distinction between clients and suppliers through styling
 
-```bash
-ng generate --help
-```
+## ✅ Evaluation Criteria
 
-## Building
+- The application is built using **Angular 20**
+- All necessary components were created
+- Data is simulated using **in-memory variables** (optionally from a **JSON file**)
+- Angular **services** are used for data access
+- **Styling** differs based on contact type (client or supplier)
+- Each contact is displayed as a **card** showing:
+  - A photo
+  - Contact information
+- A **contact detail view** is implemented
+- A **search bar** is available
+- A functional **add contact form** is included
 
-To build the project run:
+## 🌐 Technologies Used
 
-```bash
-ng build
-```
+- Angular 20
+- TypeScript
+- Tailwind CSS
+- Semantic HTML
+- Figma (for UI mockups)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+## 🧩 Created Components
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- `home` – Homepage
+- `header` – Top navigation bar
+- `footer` – Footer section
+- `formulaire` – Contact form
+- `annuaire` – Contact directory (list view)
+- `carte-contact` – Individual contact card
+- `service` – Angular service for managing contact data
 
-```bash
-ng test
-```
+## 📷 Mockups & Design
 
-## Running end-to-end tests
+- 🔗 [Figma – UI Mockups](https://www.figma.com/design/8AY31GIqCe9CgBaB76uTuN/Annuaire-Contact?t=BQeDgAOPhSwPDZXg-0)
+- 🔗 [Figma – Component Tree / Structure](https://www.figma.com/board/x5j6PnOdRKtYV1DrjCwypw/Arbo-annuaire?node-id=0-1&p=f&t=YH92Ese4SuSsXUdI-0)
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Additional Resources
 
