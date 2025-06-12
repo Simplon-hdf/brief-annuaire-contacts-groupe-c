@@ -55,6 +55,17 @@ const db = new sqlite3.Database(path.join(__dirname, 'data.db'), (err) => {
 
 // --- API Endpoints ---
 
+app.get('/api/contacts', (req, res) => {
+    const sql = `SELECT id, prenom, nom, numero, type, email, image_path FROM contacts`;
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            console.error('Database error on GET /api/contacts:', err.message);
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(rows);
+        console.log(`Successfully retrieved ${rows.length} contacts.`);
+    });
+});
 
 app.post('/api/contacts', upload.single('image'), (req, res) => {
     const { prenom, nom, numero, type, email } = req.body;
