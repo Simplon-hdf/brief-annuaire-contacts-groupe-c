@@ -1,9 +1,9 @@
 @if (contact.type === "Client") {
-  <div class="bg-brand-blue rounded-lg shadow-md p-4 flex flex-col items-center text-center max-w-sm w-full mx-auto my-2">
+  <div class="border-brand-blue border-2 rounded-lg max-h-80 shadow-md p-4 flex flex-col items-center text-center max-w-sm w-full mx-auto my-2">
   <img
     [src]="getImageUrl(contact.image_path)"
     alt="Photo de {{ contact.prenom }} {{ contact.nom }}"
-    class="w-24 h-24 rounded-full object-cover object-center mb-4 border-2 border-brand-blue"
+    class="w-24 h-24 rounded-full object-cover object-center mb-4 border-2 border-brand-green"
   >
   
   <h3 class="text-xl font-semibold text-gray-800 mb-1">
@@ -20,16 +20,12 @@
     <strong class="font-medium">Email:</strong> {{ contact.email }}
   </p>
 
-  <div class="flex gap-2">
-    <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-sm">
-      Supprimer
-    </button>
-  </div>
+  
 </div>
 } 
 
 @if (contact.type === "Fournisseur") {
-<div class="bg-brand-green rounded-lg shadow-md p-4 flex flex-col items-center text-center max-w-sm w-full mx-auto my-2">
+<div class="border-brand-green border-2 rounded-lg max-h-80 shadow-md p-4 flex flex-col items-center text-center max-w-sm w-full mx-auto my-2">
   <img
     [src]="getImageUrl(contact.image_path)"
     alt="Photo de {{ contact.prenom }} {{ contact.nom }}"
@@ -50,10 +46,6 @@
     <strong class="font-medium">Email:</strong> {{ contact.email }}
   </p>
 
-  <div class="flex gap-2">
-    <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-sm">
-      Supprimer
-    </button>
-  </div>
+  
 </div>
 } 
