@@ -1,19 +1,32 @@
-<article class="bg-gray-100 min-h-screen p-8">
- <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Liste des Contacts</h2>
+<article class="bg-gray-100 min-h-screen p-4 sm:p-6 lg:p-8">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6 sm:mb-8">
+      Liste des Contacts
+    </h2>
+
+    <div class="mb-6 sm:mb-8">
+      <app-bar-recherche 
+        (searchTermChanged)="onSearchTermChanged($event)"
+        [totalContacts]="allContacts.length"
+        [filteredContacts]="contacts.length">
+      </app-bar-recherche>
+    </div>
 
 
- <div *ngIf="contacts.length === 0 && !isLoading" class="text-center text-gray-500">
-   Aucun contact trouvé.
- </div>
+    <div *ngIf="contacts.length === 0 && !isLoading" class="text-center text-gray-500">
+      Aucun contact trouvé.
+    </div>
 
 
- <div *ngIf="isLoading" class="text-center text-blue-500">
-   Chargement des contacts...
- </div>
+    <div *ngIf="isLoading" class="text-center text-blue-500">
+      Chargement des contacts...
+    </div>
 
 
- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-   <app-carte-contact *ngFor="let contact of contacts" [contact]="contact">
-   </app-carte-contact>
-   </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <app-carte-contact *ngFor="let contact of contacts" [contact]="contact">
+      </app-carte-contact>
+      </div>
+  </div>  
+
 </article>
