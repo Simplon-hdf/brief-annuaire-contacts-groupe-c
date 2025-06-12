@@ -1,0 +1,27 @@
+<header class="bg-brand-blue flex justify-between p-5 items-center relative z-10">
+    
+     <figure class="flex items-center">
+        <a routerLink="/accueil"><img src="logo.png" class="h-16 w-72 object-cover object-center"></a>
+    </figure>
+
+    <nav class="hidden md:flex justify-around w-auto text-2xl p-2.5 text-brand-azur font-links font-semibold gap-5 self-center">
+        <a routerLink="/accueil" class="hover:text-brand-white text-center transition-colors duration-200">Accueil</a>
+        <a routerLink="/annuaire" class="hover:text-brand-white text-center transition-colors duration-200">Annuaire</a>
+        <a routerLink="/formulaire" class="hover:text-brand-white text-center transition-colors duration-200">Ajout Contact</a>
+    </nav>
+
+    <button (click)="toggleMobileMenu()" class="md:hidden text-brand-azur focus:outline-none">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4"></path>
+        </svg>
+    </button>
+
+    <nav *ngIf="isMobileMenuOpen"
+        class="absolute top-full left-0 w-full bg-brand-blue md:hidden flex flex-col items-center py-4 shadow-lg z-40">
+      
+        <a routerLink="/accueil" (click)="toggleMobileMenu()" class="block text-brand-azur hover:text-brand-white text-2xl py-2 w-full text-center transition-colors duration-200">Accueil</a>
+        <a routerLink="/annuaire" (click)="toggleMobileMenu()" class="block text-brand-azur hover:text-brand-white text-2xl py-2 w-full text-center transition-colors duration-200">Annuaire</a>
+        <a routerLink="/formulaire" (click)="toggleMobileMenu()" class="block text-brand-azur hover:text-brand-white text-2xl py-2 w-full text-center transition-colors duration-200">Ajout Contact</a>
+    </nav>
+    
+</header>
