@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Contact } from '../contact';
 import { ContactService } from '../service/contact';
 import { CarteContact } from '../carte-contact/carte-contact';
+import { BarRecherche } from '../bar-recherche/bar-recherche';
 
 
 @Component({
  selector: 'app-annuaire',
- imports: [CommonModule, CarteContact],
+ imports: [CommonModule, CarteContact, BarRecherche],
  templateUrl: './annuaire.html',
  styleUrl: './annuaire.css'
 })
