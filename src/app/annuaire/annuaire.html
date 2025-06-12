@@ -13,8 +13,18 @@
     </div>
 
 
-    <div *ngIf="contacts.length === 0 && !isLoading" class="text-center text-gray-500">
-      Aucun contact trouvé.
+    <div *ngIf="contacts.length === 0 && !isLoading !searchTerm "  class="text-center text-gray-500 py-8">
+      <div class="text-lg mb-2"></div>
+      <p>Aucun contact trouvé dans l'annuaire.</p>
+    </div>
+
+    <div *ngIf="contacts.length === 0 && !isLoading && searchTerm" class="text-center text-gray-500 py-8">
+      <div class="text-lg mb-2"></div>
+      <p>Aucun contact ne correspond à votre recherche "{{ searchTerm }}".</p>
+      <button (click)="clearSearch()" 
+              class="mt-2 text-blue-600 hover:text-blue-800 underline">
+        Afficher tous les contacts
+      </button>
     </div>
 
 
