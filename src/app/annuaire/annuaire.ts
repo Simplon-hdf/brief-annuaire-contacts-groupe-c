@@ -61,7 +61,14 @@ private filterContacts(): void {
   }
 }
 
+clearSearch(): void{
+  this.searchTerm = '';
+  this.contacts = [...this.allContacts];
+}
 
+trackByContactId(index: number, contact: Contact): any {
+  return contact.id ||index;
+}
 
 
 }
