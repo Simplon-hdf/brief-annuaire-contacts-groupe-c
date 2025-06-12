@@ -16,4 +16,13 @@ export class BarRecherche {
 
   searchValue: string = '';
 
+  onSearchInput(): void {
+    this.searchTermChanged.emit(this.searchValue);
+  }
+
+  clearSearch(): void{
+    this.searchValue ='';
+    this.searchTermChanged.emit('');
+  }
+
 }
