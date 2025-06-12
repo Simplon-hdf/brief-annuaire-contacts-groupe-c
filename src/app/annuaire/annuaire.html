@@ -27,16 +27,22 @@
       </button>
     </div>
 
-
-    <div *ngIf="isLoading" class="text-center text-blue-500">
-      Chargement des contacts...
+    <div *ngIf="contacts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+      <app-carte-contact 
+        *ngFor="let contact of contacts; trackBy: trackByContactId" 
+        [contact]="contact"
+        class="transform transition-transform duration-200 hover:scale-105">
+      </app-carte-contact>
     </div>
 
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <app-carte-contact *ngFor="let contact of contacts" [contact]="contact">
-      </app-carte-contact>
-      </div>
+
+
+    <div *ngIf="!isLoading" class="mt-8 text-center text-sm text-gray-600">
+      <p *ngIf="searchTerm"> {{ contacts.length }} contact(s) trouvé(s) sur {{ allContacts.length }} au total</p>
+      <p *ngIf="!searchTerm"> {{ contacts.length }} contact(s) au total</p>
+    </div>
+    
   </div>  
 
 </article>
