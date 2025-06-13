@@ -1,0 +1,36 @@
+<footer class="bg-brand-blue text-white p-6 md:p-16 ">
+    <div class="container mx-auto ">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-y-8 md:gap-x-12">  
+            <figure class="text-left self-center">
+              <a routerLink="/accueil"><img src="logo.png" class="h-16 w-72 object-cover object-center" alt="Logo freshNow"></a>
+            </figure>
+        <div class="text-center md:text-center flex-3">
+          <h3 class="font-semibold text-xl mb-3 text-brand-white">Navigation</h3>
+            <ul class="space-y-4 text-lg text-brand-azur">
+              <li><a routerLink="/accueil" class="hover:text-brand-white transition-colors duration-200">Accueil</a></li>
+              <li><a routerLink="/annuaire" class="hover:text-brand-white transition-colors duration-200">Annuaire</a></li>
+              <li><a routerLink="/formulaire" class="hover:text-brand-white transition-colors duration-200">Ajout Contact</a></li>
+            </ul>
+        </div>
+        <div class="text-center md:text-center flex-1">
+            <h3 class="font-semibold text-xl mb-3 text-brand-white">Contact</h3>
+            <ul class="space-y-2 text-lg text-brand-azur">
+              <li>
+                <span class="font-semibold">Mail :</span>
+                <span class="ml-4"> contact&#64;freshnow.com </span>
+            </li>
+              <li>
+                <span class="font-semibold">Téléphone :</span>
+                <span class="ml-4"> 01 20 34 54 23</span>
+            </li>
+              <li><span class="font-semibold">Adresse :</span>
+                <span class="ml-4"> 250 Rue Freida , 59000 Lille</span>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </div>
+    <div class="border-t border-brand-white border-opacity-20 pt-6 mt-20 text-center md:p-4 text-gray-300 text-sm w-full">
+        © freshNow {{ currentYear }}. Tous droits réservés.
+      </div>
+</footer>

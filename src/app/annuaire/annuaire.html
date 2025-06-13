@@ -1,0 +1,44 @@
+<article class="bg-gray-100 min-h-screen p-4 sm:p-6 lg:p-8">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6 sm:mb-8">
+      Liste des Contacts
+    </h2>
+
+    <div class="mb-6 sm:mb-8">
+      <app-bar-recherche 
+        (searchTermChanged)="onSearchTermChanged($event)"
+        [totalContacts]="allContacts.length"
+        [filteredContacts]="contacts.length">
+      </app-bar-recherche>
+    </div>
+
+    <div *ngIf="contacts.length === 0 && !isLoading !searchTerm "  class="text-center text-gray-500 py-8">
+      <div class="text-lg mb-2"></div>
+      <p>Aucun contact trouvé dans l'annuaire.</p>
+    </div>
+
+    <div *ngIf="contacts.length === 0 && !isLoading && searchTerm" class="text-center text-gray-500 py-8">
+      <div class="text-lg mb-2"></div>
+      <p>Aucun contact ne correspond à votre recherche "{{ searchTerm }}".</p>
+      <button (click)="clearSearch()" 
+              class="mt-2 text-blue-600 hover:text-blue-800 underline">
+        Afficher tous les contacts
+      </button>
+    </div>
+
+    <div *ngIf="contacts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+      <app-carte-contact 
+        *ngFor="let contact of contacts; trackBy: trackByContactId" 
+        [contact]="contact"
+        class="transform transition-transform duration-200 hover:scale-105">
+      </app-carte-contact>
+    </div>
+
+    <div *ngIf="!isLoading" class="mt-8 text-center text-sm text-gray-600">
+      <p *ngIf="searchTerm"> {{ contacts.length }} contact(s) trouvé(s) sur {{ allContacts.length }} au total</p>
+      <p *ngIf="!searchTerm"> {{ contacts.length }} contact(s) au total</p>
+    </div>
+    
+  </div>  
+
+</article>
